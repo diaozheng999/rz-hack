@@ -2,9 +2,9 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json'],
+    project: ["./tsconfig.json"],
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module', // Allows for the use of imports
+    sourceType: "module", // Allows for the use of imports
     ecmaFeatures: {
       jsx: true, // Allows for the parsing of JSX
     },
@@ -16,22 +16,28 @@ module.exports = {
     "plugin:jest/recommended",
     "prettier",
     "prettier/@typescript-eslint",
-    'plugin:react/recommended', // uses react-specific linting rules
-    'plugin:prettier/recommended', // enables eslint-plugin-prettier and eslint-config-prettier
-    'prettier/react', // disables react-specific linting rules that conflict with prettier
+    "plugin:react/recommended", // uses react-specific linting rules
+    "plugin:prettier/recommended", // enables eslint-plugin-prettier and eslint-config-prettier
+    "prettier/react", // disables react-specific linting rules that conflict with prettier
   ],
   rules: {
     "no-console": "error",
-    "@typescript-eslint/no-magic-numbers": ["error", {
-      ignore: [0, 1, -1, 2, 0.5, -2, -0.5],
-      ignoreEnums: true,
-      ignoreNumericLiteralTypes: true,
-      ignoreReadonlyClassProperties: true,
-    }],
-    "no-multiple-empty-lines": ["error", {
-      max: 1,
-      maxEOF: 0
-    }],
+    "@typescript-eslint/no-magic-numbers": [
+      "error",
+      {
+        ignore: [0, 1, -1, 2, 0.5, -2, -0.5],
+        ignoreEnums: true,
+        ignoreNumericLiteralTypes: true,
+        ignoreReadonlyClassProperties: true,
+      },
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        max: 1,
+        maxEOF: 0,
+      },
+    ],
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": ["error"],
@@ -39,7 +45,7 @@ module.exports = {
       "error",
       {
         argsIgnorePattern: "^_",
-        ignoreRestSiblings: true
+        ignoreRestSiblings: true,
       },
     ],
     "@typescript-eslint/naming-convention": [
@@ -99,12 +105,14 @@ module.exports = {
     "prettier/prettier": "error",
   },
   env: {
-    'react-native/react-native': true,
+    "react-native/react-native": true,
   },
-  overrides: [{
-    files: ["*.test.ts", "*.test.tsx"],
-    "rules": {
-      "no-magic-numbers": "off",
-    }
-  }]
+  overrides: [
+    {
+      files: ["*.test.ts", "*.test.tsx"],
+      rules: {
+        "no-magic-numbers": "off",
+      },
+    },
+  ],
 };

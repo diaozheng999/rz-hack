@@ -8,7 +8,9 @@
     "barrel": "otah barrel",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start"
+    "start": "react-native start",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.ts .",
+    "prettier": "prettier --write \"**/*.{ts,tsx,js,jsx}\""
   },
   "repository": {
     "type": "git",
