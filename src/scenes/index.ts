@@ -2,8 +2,7 @@
 
 // GENERATED CODE: DO NOT EDIT
 
+import { Loading } from "./Loading";
 import { Main } from "./Main";
 
-export {
-  Main,
-};
+export { Loading, Main };

@@ -2,6 +2,6 @@
 
 // GENERATED CODE: DO NOT EDIT
 
-import * as Colours from "./Colours";
+import { Account } from "./Account";
 
-export { Colours };
+export { Account };

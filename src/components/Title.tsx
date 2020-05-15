@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+import { Colours } from "../styles";
 
 export interface TitleProps {
   title: string;
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontWeight: "bold",
-    textAlign: "center"
-  }
+    textAlign: "center",
+    color: Colours.primary,
+  },
 });
