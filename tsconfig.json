@@ -22,6 +22,7 @@
     "declarationDir": "dist/types",
     "importHelpers": true,
     "noEmit": true,
+    "jsx": "react-native"
   },
   "include": [
     "./src/**/*"
