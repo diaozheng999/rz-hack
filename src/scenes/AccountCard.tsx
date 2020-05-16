@@ -5,12 +5,11 @@ import { View, StyleSheet } from "react-native";
 import { Optional } from "nasi-lemak";
 
 import type { Account } from "../models";
-import { AccountBalance } from "../components";
+import { AccountBalance, CreateTransaction } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../reducers";
 import { ThunkDispatch } from "../thunks";
 import { TransactionAction } from "../actions";
-import { CreateTransaction } from "../components/CreateTransaction";
 
 export interface AccountCardProps {
   account: Account;
