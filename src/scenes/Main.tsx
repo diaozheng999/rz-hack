@@ -3,7 +3,6 @@ import "react-native-gesture-handler";
 import React, { useEffect } from "react";
 import { RootContainer, Title } from "../components";
 import { NavigationContainer } from "@react-navigation/native";
-import { ScrollView } from "react-native-gesture-handler";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { RootReducer } from "../reducers";
@@ -11,7 +10,7 @@ import { Loading } from "./Loading";
 import { ThunkDispatch, GetAccounts } from "../thunks";
 import thunk from "redux-thunk";
 import { MainContainer } from "./MainContainer";
-import { AccountRow } from "./AccountRow";
+import { AccountList } from "./AccountList";
 
 const store = configureStore({
   reducer: RootReducer,
@@ -30,9 +29,7 @@ export function Main() {
         <RootContainer>
           <Title title="Q*bert" />
           <MainContainer />
-          <ScrollView>
-            <AccountRow />
-          </ScrollView>
+          <AccountList />
           <Loading />
         </RootContainer>
       </NavigationContainer>

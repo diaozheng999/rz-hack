@@ -1,4 +1,4 @@
-import { Action, AccountAction } from "../actions";
+import { AccountAction } from "../actions";
 import { Thunk } from "./types";
 import { Semaphore } from "nasi";
 

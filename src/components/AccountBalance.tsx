@@ -2,20 +2,23 @@
 
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { BaseButton } from "react-native-gesture-handler";
 import { Colours } from "../styles";
 import { val } from "../utils";
 
 export interface AccountBalanceProps {
   accountNumber: string;
   accountBalance: number;
+  onPress: () => void;
 }
 
 export function AccountBalance({
   accountNumber,
   accountBalance,
+  onPress,
 }: AccountBalanceProps) {
   return (
-    <View style={styles.container}>
+    <BaseButton style={styles.swipeWrapper} onPress={onPress}>
       <View style={styles.accountSection}>
         <Text style={styles.accountLabel}>Account</Text>
         <Text style={styles.accountNumber}>{accountNumber}</Text>
@@ -24,20 +27,17 @@ export function AccountBalance({
         <Text style={styles.dollarSign}>$</Text>
         <Text style={styles.balance}>{val(accountBalance)}</Text>
       </View>
-    </View>
+    </BaseButton>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    elevation: 5,
-    borderRadius: 5,
-    margin: 20,
-    marginTop: 0,
-    height: 80,
-    backgroundColor: Colours.background,
+  swipeWrapper: {
+    flex: 1,
     flexDirection: "row",
     padding: 20,
+    backgroundColor: Colours.background,
+    borderRadius: 5,
   },
   accountSection: {
     flex: 1,

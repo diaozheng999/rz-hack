@@ -16,9 +16,8 @@ function transaction(
 ): TransactionState {
   switch (action.type) {
     case "@@tranct/BEGIN":
-      invariant(() => !state);
       return {
-        withdraw: List(),
+        withdraw: Option.value(state.withdraw, List()),
       };
 
     case "@@tranct/ADD_ROW":

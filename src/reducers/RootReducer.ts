@@ -5,10 +5,14 @@ import type { Account } from "../models";
 import { combineReducers, ActionFromReducer } from "redux";
 import { AccountReducer } from "./AccountReducer";
 import { LoadingReducer } from "./LoadingReducer";
+import { TransactionReducer } from "./TransactionReducer";
+import { ActiveTransactionReducer } from "./ActiveTransactionReducer";
 
 export const RootReducer = combineReducers({
   account: AccountReducer,
   loading: LoadingReducer,
+  transactions: TransactionReducer,
+  activeTransactions: ActiveTransactionReducer,
 });
 
 export type RootAction = ActionFromReducer<typeof RootReducer>;

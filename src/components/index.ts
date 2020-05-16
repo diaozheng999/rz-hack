@@ -3,6 +3,7 @@
 // GENERATED CODE: DO NOT EDIT
 
 import { AccountBalance, AccountBalanceProps } from "./AccountBalance";
+import { CreateTransaction, CreateTransactionProps } from "./CreateTransaction";
 import { Loader, LoaderProps } from "./Loader";
 import {
   MainAccountBalance,
@@ -14,6 +15,8 @@ import { Title, TitleProps } from "./Title";
 export {
   AccountBalance,
   AccountBalanceProps,
+  CreateTransaction,
+  CreateTransactionProps,
   Loader,
   LoaderProps,
   MainAccountBalance,
