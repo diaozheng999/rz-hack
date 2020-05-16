@@ -1,10 +1,7 @@
 import "react-native-gesture-handler";
 
 import React, { useEffect } from "react";
-import {
-  RootContainer,
-  Title,
-} from "../components";
+import { RootContainer, Title } from "../components";
 import { NavigationContainer } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
 import { configureStore } from "@reduxjs/toolkit";
@@ -14,7 +11,7 @@ import { Loading } from "./Loading";
 import { ThunkDispatch, GetAccounts } from "../thunks";
 import thunk from "redux-thunk";
 import { MainContainer } from "./MainContainer";
-import { AccountRow } from './AccountRow';
+import { AccountRow } from "./AccountRow";
 
 const store = configureStore({
   reducer: RootReducer,

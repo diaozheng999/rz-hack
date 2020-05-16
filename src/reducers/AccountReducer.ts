@@ -1,20 +1,36 @@
 import type { Account } from "../models";
 import { Map } from "immutable";
-import { AccountAction } from "../actions";
+import { AccountAction, TransactionAction } from "../actions";
 import { createWithDefault } from "./utils";
+import { assert, Option } from "nasi";
 
 export type AccountState = Map<string, Account>;
 
-function account(state: AccountState, action: AccountAction): AccountState {
+function account(
+  state: AccountState,
+  action: AccountAction | TransactionAction,
+): AccountState {
   switch (action.type) {
     case "@@account/ADD_ACCOUNTS":
-      let newState = state;
+      let newStateA = state;
 
       for (const account of action.payload) {
-        newState = newState.set(account.id, account);
+        newStateA = newStateA.set(account.id, account);
       }
 
-      return newState;
+      return newStateA;
+
+    case "@@tranct/DELTA":
+      let newStateD = state;
+      for (const [accountId, delta] of action.payload) {
+        const account = newStateD.get(accountId);
+        assert(Option.isSome, account);
+        newStateD.set(account.id, {
+          ...account,
+          balance: delta + account.balance,
+        });
+      }
+      return newStateD;
 
     default:
       return state;

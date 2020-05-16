@@ -8,13 +8,16 @@ export function AccountRow() {
 
   return (
     <>
-      {accounts.map((acct, id) => (
-        <AccountBalance
-          accountNumber={acct.maskedNumber}
-          accountBalance={acct.balance}
-          key={id}
-        />
-      )).toList().toArray()}
+      {accounts
+        .map((acct, id) => (
+          <AccountBalance
+            accountNumber={acct.maskedNumber}
+            accountBalance={acct.balance}
+            key={id}
+          />
+        ))
+        .toList()
+        .toArray()}
     </>
   );
 }

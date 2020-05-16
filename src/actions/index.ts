@@ -3,5 +3,6 @@
 // GENERATED CODE: DO NOT EDIT
 
 import { AccountAction } from "./AccountAction";
+import { TransactionAction } from "./TransactionAction";
 
-export { AccountAction };
+export { AccountAction, TransactionAction };

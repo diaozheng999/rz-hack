@@ -5,5 +5,13 @@
 import { AccountReducer } from "./AccountReducer";
 import { LoadingReducer } from "./LoadingReducer";
 import { RootAction, RootReducer, RootState } from "./RootReducer";
+import { TransactionReducer } from "./TransactionReducer";
 
-export { AccountReducer, LoadingReducer, RootAction, RootReducer, RootState };
+export {
+  AccountReducer,
+  LoadingReducer,
+  RootAction,
+  RootReducer,
+  RootState,
+  TransactionReducer,
+};
