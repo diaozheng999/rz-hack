@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     top: 0,
-    backgroundColor: Colour.toString(Colour.rgba(1, 1, 1, 0.8, true)),
+    backgroundColor: Colour.toString(Colour.rgba(1, 1, 1, 0.95, true)),
     elevation: 100,
     alignItems: "center",
     justifyContent: "center",
