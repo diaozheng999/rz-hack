@@ -16,7 +16,10 @@ export function BottomButtons() {
     (state: RootState) => !!state.transactions.destination,
   );
 
-  const hasSelectedDestination = useSelector((state: RootState) => state.transactions.destination !== DESTINATION_UNSET_SYMBOL)
+  const hasSelectedDestination = useSelector(
+    (state: RootState) =>
+      state.transactions.destination !== DESTINATION_UNSET_SYMBOL,
+  );
 
   const dispatch = useDispatch<ThunkDispatch>();
 

@@ -1,35 +1,43 @@
 import { AccountAction } from "../actions";
 import { Thunk } from "./types";
-import { Semaphore } from "nasi";
+import { Account } from "../models";
+
+interface QBAccount {
+  accounts: Array<{
+    id: string;
+    name: string;
+    balance: string;
+  }>;
+}
+
+export async function getAccounts(): Promise<Account[]> {
+  try {
+    const response = await fetch("http://54.169.75.49:12012/accounts");
+    const result: QBAccount = await response.json();
+    return result.accounts.map(({ id, name, balance }, __qfSortOrder) => ({
+      id,
+      maskedNumber: name,
+      type: name,
+      balance: parseInt(balance, 10),
+      __qfSortOrder,
+    }));
+  } catch (e) {
+    console.warn("An error occurred.");
+    return [];
+  }
+}
 
 export function GetAccounts(): Thunk {
   return async (dispatch) => {
     dispatch(AccountAction.beginFetchAll());
 
-    await Semaphore.sleep(1000);
+    try {
+      const accounts = await getAccounts();
 
-    dispatch(
-      AccountAction.setAllAccounts([
-        {
-          id: "1001",
-          maskedNumber: "****1234",
-          type: "DBS",
-          balance: 12345600,
-        },
-        {
-          id: "1002",
-          maskedNumber: "****8325",
-          type: "OCBC",
-          balance: 346200,
-        },
-        {
-          id: "1003",
-          maskedNumber: "****5327",
-          type: "UOB",
-          balance: 125263700,
-        },
-      ]),
-    );
+      dispatch(AccountAction.setAllAccounts(accounts));
+    } catch (e) {
+      console.warn("An error occurred.");
+    }
 
     dispatch(AccountAction.completeFetchAll());
   };

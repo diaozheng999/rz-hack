@@ -3,4 +3,5 @@ export interface Account {
   type: string;
   maskedNumber: string;
   balance: number;
+  __qfSortOrder: number;
 }

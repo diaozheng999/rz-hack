@@ -1,7 +1,14 @@
 // @barrel component type
 
 import React, { useRef, useEffect } from "react";
-import { Animated, Text, View, StyleSheet, ViewStyle, StyleProp } from "react-native";
+import {
+  Animated,
+  Text,
+  View,
+  StyleSheet,
+  ViewStyle,
+  StyleProp,
+} from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
@@ -44,8 +51,9 @@ export function Buttons({
     ],
   };
 
-  const commitButtonStyle: StyleProp<ViewStyle> =
-    commitEnabled ? styles.commitButton : [styles.commitButton, styles.disabled];
+  const commitButtonStyle: StyleProp<ViewStyle> = commitEnabled
+    ? styles.commitButton
+    : [styles.commitButton, styles.disabled];
 
   return (
     <View style={styles.wrapper}>
@@ -57,7 +65,11 @@ export function Buttons({
             color={Colours.background}
           />
         </RectButton>
-        <RectButton onPress={onCommit} style={commitButtonStyle} enabled={commitEnabled}>
+        <RectButton
+          onPress={onCommit}
+          style={commitButtonStyle}
+          enabled={commitEnabled}
+        >
           <FontAwesomeIcon
             icon={commitIcon}
             size={18}
@@ -101,5 +113,5 @@ const styles = StyleSheet.create({
   },
   disabled: {
     backgroundColor: Colours.secondary,
-  }
+  },
 });
