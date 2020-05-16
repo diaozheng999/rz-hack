@@ -1,18 +1,20 @@
 from flask import Flask
 from flask_restplus import Resource, Api, fields
 import requests, re, json, logging
+from creds import creds
 
 app = Flask(__name__)
 api = Api(app, version='1.0', title='Q*bert', description='Manage your bank accounts!')
 logging.basicConfig(level=logging.INFO)
 
 post_url = "https://razerhackathon.sandbox.mambu.com/api/savings/{}/transactions"
-get_url = "https://Team87:pass2FA336429@razerhackathon.sandbox.mambu.com/api/clients/079660108/savings/{}"
+get_url = "https://{}@razerhackathon.sandbox.mambu.com/api/clients/079660108/savings/{{}}".format(creds['teamlogin'])
+
 post_headers = {
   'Content-Type': 'application/json',
-  'Authorization': 'Basic VGVhbTg3OnBhc3MyRkEzMzY0Mjk=',
+  'Authorization': creds['mambuAuth'],
   'Content-Type': 'application/json',
-  'Cookie': 'AWSALB=FacSX6ozn2Q38ZT6NZQhNEK9j5MlZOt7pGLUapLoevhbwREEo+Jtj1jDjvkfLZGsVLIXPmeewVWRy53zAbF8itWbXPXF/mr707PhcIYczC1NyQA1mDDPoacCpStJ; AWSALBCORS=FacSX6ozn2Q38ZT6NZQhNEK9j5MlZOt7pGLUapLoevhbwREEo+Jtj1jDjvkfLZGsVLIXPmeewVWRy53zAbF8itWbXPXF/mr707PhcIYczC1NyQA1mDDPoacCpStJ'
+  'Cookie': creds['mambuCookie']
 }
 
 post_payload = {'type': 'TRANSFER',
