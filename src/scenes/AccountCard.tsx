@@ -23,18 +23,24 @@ export function AccountCard({ account }: AccountCardProps) {
     state.activeTransactions.has(account.id) ? "TRANSACT" : "BALANCE",
   );
 
+  const outstanding = useSelector((state: RootState) =>
+    state.transactions.withdraw.get(account.id),
+  );
+
   return (
     <View style={styles.container}>
       <Optional predicate={state === "BALANCE"}>
         <AccountBalance
           accountNumber={account.maskedNumber}
           accountBalance={account.balance}
+          outstandingBalance={outstanding}
           onPress={() => dispatch(TransactionAction.begin(account.id))}
         />
       </Optional>
       <Optional predicate={state === "TRANSACT"}>
         <CreateTransaction
           account={account}
+          outstandingBalance={outstanding}
           onCancel={() => dispatch(TransactionAction.cancelRow(account.id))}
           onSubmit={(value) =>
             dispatch(TransactionAction.addRow([account.id, value]))

@@ -5,18 +5,23 @@ import { View, Text, StyleSheet } from "react-native";
 import { BaseButton } from "react-native-gesture-handler";
 import { Colours } from "../styles";
 import { val } from "../utils";
+import { Option, Optional } from "nasi-lemak";
 
 export interface AccountBalanceProps {
   accountNumber: string;
   accountBalance: number;
+  outstandingBalance?: number;
   onPress: () => void;
 }
 
 export function AccountBalance({
   accountNumber,
   accountBalance,
+  outstandingBalance,
   onPress,
 }: AccountBalanceProps) {
+  const bal = accountBalance - Option.value(outstandingBalance, 0);
+
   return (
     <BaseButton style={styles.swipeWrapper} onPress={onPress}>
       <View style={styles.accountSection}>
@@ -24,8 +29,15 @@ export function AccountBalance({
         <Text style={styles.accountNumber}>{accountNumber}</Text>
       </View>
       <View style={styles.balanceSection}>
-        <Text style={styles.dollarSign}>$</Text>
-        <Text style={styles.balance}>{val(accountBalance)}</Text>
+        <View style={styles.section}>
+          <Text style={styles.dollarSign}>$</Text>
+          <Text style={styles.balance}>{val(accountBalance)}</Text>
+        </View>
+        <Optional predicate={Option.isSome(outstandingBalance)}>
+          <View style={styles.section}>
+            <Text style={styles.available}>(${val(bal)})</Text>
+          </View>
+        </Optional>
       </View>
     </BaseButton>
   );
@@ -53,12 +65,20 @@ const styles = StyleSheet.create({
   },
   balanceSection: {
     flex: 1,
+    alignItems: "flex-end",
+  },
+  section: {
+    flex: 1,
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
   },
   dollarSign: {
     fontSize: 18,
+    color: Colours.primary,
+  },
+  available: {
+    fontSize: 14,
     color: Colours.primary,
   },
   balance: {

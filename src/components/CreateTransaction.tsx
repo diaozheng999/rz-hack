@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 
 import React, { useState, useMemo } from "react";
 import { StyleSheet } from "react-native";
+import { Option, Optional } from "nasi-lemak";
 import numeral from "numeral";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -16,18 +17,23 @@ import { val } from "../utils";
 
 export interface CreateTransactionProps {
   account: Account;
+  outstandingBalance?: number;
   onCancel: () => void;
   onSubmit: (value: number) => void;
 }
 
 export function CreateTransaction({
   account,
+  outstandingBalance,
   onCancel,
   onSubmit,
 }: CreateTransactionProps) {
-  const [toDeduct, setToDeduct] = useState(val(account.balance));
+  const [toDeduct, setToDeduct] = useState("0");
 
   const [hasError, setError] = useState(false);
+
+  const outstanding = Option.value(outstandingBalance, 0);
+  const available = account.balance - outstanding;
 
   const validate = useMemo(
     () => () => {
@@ -35,13 +41,15 @@ export function CreateTransaction({
 
       const ccents = cents * 100;
 
-      if (ccents > account.balance) {
+      const newBalance = outstanding + ccents;
+
+      if (newBalance > account.balance || newBalance < 0) {
         setError(true);
       } else {
         onSubmit(ccents);
       }
     },
-    [toDeduct, account],
+    [toDeduct, available],
   );
 
   return (
@@ -50,6 +58,9 @@ export function CreateTransaction({
         <View style={styles.label}>
           <Text style={styles.labelStatic}>Withdraw </Text>
           <Text style={styles.labelAcctNo}>${val(account.balance)}</Text>
+          <Optional predicate={Option.isSome(outstandingBalance)}>
+            <Text style={styles.labelStatic}> (${val(available)})</Text>
+          </Optional>
         </View>
         <View style={styles.inputWrapper}>
           <TextInput

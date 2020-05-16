@@ -1,12 +1,10 @@
-import { List } from "immutable";
-import { invariant, Option } from "nasi";
+import { Map } from "immutable";
+import { Option } from "nasi";
 import { TransactionAction } from "../actions";
 import { createWithDefault } from "./utils";
 
-type Row = readonly [string, number];
-
 export interface TransactionState {
-  withdraw?: List<Row>;
+  withdraw: Map<string, number>;
   destination?: string;
 }
 
@@ -17,12 +15,25 @@ function transaction(
   switch (action.type) {
     case "@@tranct/BEGIN":
       return {
-        withdraw: Option.value(state.withdraw, List()),
+        withdraw: Option.value(state.withdraw, Map()),
       };
 
     case "@@tranct/ADD_ROW":
+      const [id, value] = action.payload;
+
+      if (!value) {
+        return state;
+      }
+
+      const prevWithdraw = Option.value(state.withdraw, Map<string, number>());
+      const prevValue = prevWithdraw.get(id);
+
+      const newValue = Option.value(prevValue, 0) + value;
+
       return {
-        withdraw: Option.value(state.withdraw, List()).push(action.payload),
+        withdraw: newValue
+          ? prevWithdraw.set(id, newValue)
+          : prevWithdraw.remove(id),
         destination: state.destination,
       };
 
@@ -34,11 +45,15 @@ function transaction(
 
     case "@@tranct/BEGIN_COMMIT":
     case "@@tranct/CANCEL":
-      return {};
+      return {
+        withdraw: Map(),
+      };
 
     default:
       return state;
   }
 }
 
-export const TransactionReducer = createWithDefault(transaction, {});
+export const TransactionReducer = createWithDefault(transaction, {
+  withdraw: Map<string, number>(),
+});
