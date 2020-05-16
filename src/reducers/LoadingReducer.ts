@@ -10,6 +10,9 @@ function loading(state: LoadingState, action: AccountAction): LoadingState {
 
     case "@@account/COMPLETE_FETCH_ALL":
       return Math.max(0, --state);
+
+    default:
+      return state;
   }
 }
 

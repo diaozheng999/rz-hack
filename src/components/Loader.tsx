@@ -5,6 +5,7 @@ import LottieView from "lottie-react-native";
 
 import LOADING_ANIMATION from "../resources/loading.json";
 import { StyleSheet, Animated } from "react-native";
+import { Colour } from "nasi";
 
 export interface LoaderProps {
   shown: boolean;
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     top: 0,
-    backgroundColor: "white",
+    backgroundColor: Colour.toString(Colour.rgba(1, 1, 1, 0.8, true)),
     elevation: 100,
     alignItems: "center",
     justifyContent: "center",

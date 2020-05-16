@@ -20,5 +20,6 @@ export function RootContainer({ children }: RootContainerProps) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colours.alt,
+    flex: 1,
   },
 });

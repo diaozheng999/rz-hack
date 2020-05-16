@@ -3,6 +3,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Colours } from "../styles";
+import { val } from "../utils";
 
 export interface AccountBalanceProps {
   accountNumber: string;
@@ -21,7 +22,7 @@ export function AccountBalance({
       </View>
       <View style={styles.balanceSection}>
         <Text style={styles.dollarSign}>$</Text>
-        <Text style={styles.balance}>{accountBalance}</Text>
+        <Text style={styles.balance}>{val(accountBalance)}</Text>
       </View>
     </View>
   );
