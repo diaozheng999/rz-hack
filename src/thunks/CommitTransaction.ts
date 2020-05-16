@@ -26,7 +26,6 @@ async function transfer(
 
   console.log(">>transfer", response);
 
-
   await fetch("http://54.169.75.49:12012/transfer", {
     method: "POST",
     headers: {
