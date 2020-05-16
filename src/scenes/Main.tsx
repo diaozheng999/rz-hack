@@ -11,6 +11,7 @@ import { ThunkDispatch, GetAccounts } from "../thunks";
 import thunk from "redux-thunk";
 import { MainContainer } from "./MainContainer";
 import { AccountList } from "./AccountList";
+import { BottomButtons } from "./BottomButtons";
 
 const store = configureStore({
   reducer: RootReducer,
@@ -30,6 +31,7 @@ export function Main() {
           <Title title="Q*bert" />
           <MainContainer />
           <AccountList />
+          <BottomButtons />
           <Loading />
         </RootContainer>
       </NavigationContainer>

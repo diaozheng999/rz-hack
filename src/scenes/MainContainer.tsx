@@ -12,7 +12,9 @@ export function MainContainer() {
     (state: RootState) => state.transactions.withdraw.size,
   );
 
-  const withdrawAmount = useSelector((state: RootState) => state.transactions.withdraw.reduce((acc, amount) => acc + amount, 0));
+  const withdrawAmount = useSelector((state: RootState) =>
+    state.transactions.withdraw.reduce((acc, amount) => acc + amount, 0),
+  );
 
   if (transactionAccountCount > 0) {
     return (

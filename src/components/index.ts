@@ -7,6 +7,7 @@ import {
   ActiveTransactionList,
   ActiveTransactionListProps,
 } from "./ActiveTransactionList";
+import { Buttons, ButtonsProps } from "./Buttons";
 import { CreateTransaction, CreateTransactionProps } from "./CreateTransaction";
 import { Loader, LoaderProps } from "./Loader";
 import {
@@ -21,6 +22,8 @@ export {
   AccountBalanceProps,
   ActiveTransactionList,
   ActiveTransactionListProps,
+  Buttons,
+  ButtonsProps,
   CreateTransaction,
   CreateTransactionProps,
   Loader,

@@ -1,11 +1,21 @@
+// @barrel export DESTINATION_UNSET_SYMBOL, destinationIsSet
+
 import { Map } from "immutable";
 import { Option } from "nasi";
 import { TransactionAction } from "../actions";
 import { createWithDefault } from "./utils";
 
+export const DESTINATION_UNSET_SYMBOL = Symbol("QBDestination");
+
 export interface TransactionState {
   withdraw: Map<string, number>;
-  destination?: string;
+  destination?: string | typeof DESTINATION_UNSET_SYMBOL;
+}
+
+export function destinationIsSet(
+  d: Option.Type<string | typeof DESTINATION_UNSET_SYMBOL>,
+): d is string {
+  return Option.isSome(d) && d !== DESTINATION_UNSET_SYMBOL;
 }
 
 function transaction(
@@ -35,6 +45,12 @@ function transaction(
           ? prevWithdraw.set(id, newValue)
           : prevWithdraw.remove(id),
         destination: state.destination,
+      };
+
+    case "@@tranct/BEGIN_SET_DEST":
+      return {
+        withdraw: state.withdraw,
+        destination: DESTINATION_UNSET_SYMBOL,
       };
 
     case "@@tranct/COMMIT_DEST":

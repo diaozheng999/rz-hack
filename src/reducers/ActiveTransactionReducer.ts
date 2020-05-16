@@ -18,6 +18,10 @@ function transaction(
     case "@@tranct/CANCEL_ROW":
       return state.remove(action.payload);
 
+    case "@@tranct/BEGIN_SET_DEST":
+    case "@@tranct/CANCEL":
+      return Map();
+
     default:
       return state;
   }

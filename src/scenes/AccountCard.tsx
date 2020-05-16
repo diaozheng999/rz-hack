@@ -14,9 +14,13 @@ import { CreateTransaction } from "../components/CreateTransaction";
 
 export interface AccountCardProps {
   account: Account;
+  isSelectingDestination: boolean;
 }
 
-export function AccountCard({ account }: AccountCardProps) {
+export function AccountCard({
+  account,
+  isSelectingDestination,
+}: AccountCardProps) {
   const dispatch = useDispatch<ThunkDispatch>();
 
   const state = useSelector((state: RootState) =>
@@ -27,6 +31,10 @@ export function AccountCard({ account }: AccountCardProps) {
     state.transactions.withdraw.get(account.id),
   );
 
+  const isSelected = useSelector(
+    (state: RootState) => state.transactions.destination === account.id,
+  );
+
   return (
     <View style={styles.container}>
       <Optional predicate={state === "BALANCE"}>
@@ -34,7 +42,12 @@ export function AccountCard({ account }: AccountCardProps) {
           accountNumber={account.maskedNumber}
           accountBalance={account.balance}
           outstandingBalance={outstanding}
-          onPress={() => dispatch(TransactionAction.begin(account.id))}
+          isDestination={isSelected}
+          onPress={() =>
+            isSelectingDestination
+              ? dispatch(TransactionAction.commitDest(account.id))
+              : dispatch(TransactionAction.begin(account.id))
+          }
         />
       </Optional>
       <Optional predicate={state === "TRANSACT"}>

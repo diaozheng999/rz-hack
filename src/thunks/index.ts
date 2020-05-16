@@ -2,7 +2,8 @@
 
 // GENERATED CODE: DO NOT EDIT
 
+import { CommitTransaction } from "./CommitTransaction";
 import { GetAccounts } from "./GetAccounts";
 import { Thunk, ThunkDispatch, types } from "./types";
 
-export { GetAccounts, Thunk, ThunkDispatch, types };
+export { CommitTransaction, GetAccounts, Thunk, ThunkDispatch, types };

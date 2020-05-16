@@ -25,7 +25,7 @@ function account(
       for (const [accountId, delta] of action.payload) {
         const account = newStateD.get(accountId);
         assert(Option.isSome, account);
-        newStateD.set(account.id, {
+        newStateD = newStateD.set(account.id, {
           ...account,
           balance: delta + account.balance,
         });
