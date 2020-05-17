@@ -71,4 +71,5 @@ license.json
 backend/misc/
 backend/creds.py
 backend/__pycache__/
+backend/specs/
 
